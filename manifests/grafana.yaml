@@ -1,0 +1,68 @@
+adminUser: admin
+adminPassword: demoloki
+
+service:
+  type: LoadBalancer
+  port: 80
+  targetPort: 3000
+    # targetPort: 4181 To be used with a proxy extraContainer
+  annotations: {}
+  labels: {}
+  portName: service
+
+datasources: 
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+    - name: demoloki
+      type: loki
+      url: http://loki:3100
+      access: proxy
+      isDefault: true
+
+# dashboardProviders: 
+#   dashboardproviders.yaml:
+#     apiVersion: 1
+#     providers:
+#     - name: default
+#       orgId: 1
+#       folder: eks
+#       type: file
+#       disableDeletion: false
+#       editable: true
+#       options:
+#         path: /var/lib/grafana/dashboards/default
+
+# dashboards:
+#   default:
+#     deployment-kubernetes-metrics:
+#       gnetId: 8588
+#       revision: 1
+#       datasource: ${prometheus_ds}
+#     kubernetes-cluster-overview:
+#       gnetId: 11802
+#       revision: 1
+#       datasource: ${prometheus_ds}
+
+# notifiers: 
+#   notifiers.yaml:
+#     notifiers:
+#     - name: ${grafana_slack_notifier}
+#       type: slack
+#       uid: slack
+#       org_id: 1
+#       is_default: true
+#       settings:
+#         url: ${grafana_slack_url}
+#         recipient: '${grafana_slack_channel}'
+
+# persistence:
+#   enabled: false
+#   storageClassName: default
+#   accessModes:
+#     - ReadWriteOnce
+#   size: 4Gi
+
+# plugins:
+#   - digrich-bubblechart-panel
+#   - grafana-clock-panel
