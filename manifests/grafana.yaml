@@ -3,7 +3,7 @@ adminPassword: demoloki
 
 service:
   type: LoadBalancer
-  port: 80
+  port: 8084
   targetPort: 3000
     # targetPort: 4181 To be used with a proxy extraContainer
   annotations: {}

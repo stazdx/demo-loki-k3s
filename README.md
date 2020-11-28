@@ -58,10 +58,10 @@ $ kubectl cluster-info
 ### Instalamos Helm
 
 ```sh
-# Instalamos k3s
+# Instalamos Helm
 $ snap install helm --classic
 
-# Verificamos que tengamos instalado helm
+# Verificamos que tengamos instalado Helm
 $ helm
 ```
 
@@ -106,7 +106,7 @@ $ kubectl port-forward --address $NODE_IP service/grafana 8084:80
 
 1. Desde el menu lateral de Grafana vamos a `Configuration` -> `Data Sources` -> `Add Data Source`
 2. Buscamos loki y lo seleccionamos
-3. En el campo `URL` colocamos `http://loki:3100 `
+3. En el campo `URL` colocamos `http://loki:3100`
 4. Luego click en `Save & Test`
 
 ### Observamos logs
@@ -154,12 +154,21 @@ $ helm upgrade --install loki loki/loki-stack -f loki.yaml
 # Instalamos grafana apuntando al manifest grafana.yaml que se encuentra en la carpeta manifest, para esto copiamos su contenido dentro de un archivo en nuestra instancia
 $ helm upgrade --install grafana grafana/grafana -f grafana.yaml
 
-# Editamos el service type de grafana, cambiamos de ClusterIP a LoadBalancer y el puerto a 8084
-$ kubectl edit svc grafana # Se abre la interfaz de 'vi' para editar el manifiesto
-
 # Vamos a nuestro navegador e ingresamos -> $NODE_IP:8084 y autenticamos con  el usuario admin y el password que pusimos en nuestro manifiesto de grafana
 
 # Podremos observar que ya tenemos el datasource de loki preconfigurado y ya podremos ver logs :)
+
+```
+
+### Borrar nuestra instancia de Multipass
+
+```sh
+
+# Primero borramos nuestros charts instalados 
+$ multipass delete demok3s
+
+# Borra todas las instancias de multipass
+$ multipass purge
 
 ```
 
