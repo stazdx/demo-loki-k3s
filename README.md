@@ -23,7 +23,7 @@ Para esta Demo, utilizaremos la instalación en mac utilizando Homebrew
 
 ```sh
 # Instalamos Multipass con brew cask
-$ brew cask install multipass
+$ brew install --cask multipass
 
 # Verificamos que lo tenemos instalado
 $ multipass
