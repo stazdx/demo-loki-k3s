@@ -94,7 +94,7 @@ $ helm upgrade --install grafana grafana/grafana
 $ kubectl get secret --namespace default grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 
 # Obtenemos el ip de nuestro nodo en otra ventana del terminal (fuera de nuestra instancia Ubuntu)
-$ multipass ls | sed -e '1d' | awk '{print $3}'
+$ export $NODE_IP=$(multipass ls | sed -e '1d' | awk '{print $3}')
 
 # Redireccionamos el tráfico que sale de nuestro servicio grafana:80 hacia $NODE_IP:8084, donde $NODE_IP es el IP que obtuvimos en el comando anterior (ejecutamos dentro de nuestra instancia Ubuntu)
 $ kubectl port-forward --address $NODE_IP service/grafana 8084:80
